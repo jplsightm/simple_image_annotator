@@ -7,4 +7,6 @@ RUN pip install Flask
 WORKDIR /opt/jplsightm/simple_image_annotator
 COPY ./ .
 RUN mkdir /images/
-ENTRYPOINT [ "python", "app.py", "images" ]
+RUN cp actionshot.png /images/.
+RUN ls /images
+ENTRYPOINT [ "python", "app.py", "/images" ]

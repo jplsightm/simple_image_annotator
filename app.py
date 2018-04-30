@@ -81,6 +81,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('dir', type=str, help='specify the images directory')
     parser.add_argument("--out")
+    parser.add_argument("--ip", type=str, dest='ip', default="127.0.0.1")
     args = parser.parse_args()
     directory = args.dir
     if directory[len(directory) - 1] != "/":
@@ -88,6 +89,7 @@ if __name__ == "__main__":
     app.config["IMAGES"] = directory
     app.config["LABELS"] = []
     files = None
+    print(directory)
     for (dirpath, dirnames, filenames) in walk(app.config["IMAGES"]):
         files = filenames
         break
@@ -103,4 +105,4 @@ if __name__ == "__main__":
     print(files)
     with open("out.csv",'w') as f:
         f.write("image,id,name,xMin,xMax,yMin,yMax\n")
-    app.run(debug="True")
+    app.run(debug="True", host="0.0.0.0")
